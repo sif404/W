@@ -32,7 +32,7 @@ export default defineConfig({
         manualChunks: {
           vendor: ["react", "react-dom"],
           motion: ["framer-motion"],
-          ui: ["@radix-ui/react-dialog", "@radix-ui/react-tooltip"],
+          
         }
       }
     }
