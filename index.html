@@ -711,7 +711,7 @@
       ctx.strokeStyle=stroke;
       ctx.lineWidth = 1 + t*1.4;
       ctx.beginPath();
-      const stepPx=4;
+      const stepPx=2;
       const sx = scrollX*c.speed + c.phase*40;
       for(let x=0;x<=w;x+=stepPx){
         const u=(x+sx)*c.freq;
@@ -835,6 +835,8 @@
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
   size(); addEventListener('resize',size);
+  let isVisible_cityos = false;
+  new IntersectionObserver(e=>{isVisible_cityos=e[0].isIntersecting;},{threshold:0.1}).observe(canvas);
 
   const nodes=[
     {id:'Mobility', c:'#22d3ee', a:-Math.PI/2 - 0.55},
@@ -855,6 +857,7 @@
   }
 
   function draw(now){
+    if(!isVisible_cityos){ requestAnimationFrame(draw); return; }
     const cx=W/2, cy=H/2;
     const radius=Math.min(W,H)*0.36;
     const centerR=Math.min(W,H)*0.085;
@@ -951,6 +954,8 @@
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
   size(); addEventListener('resize',size);
+  let isVisible_iot = false;
+  new IntersectionObserver(e=>{isVisible_iot=e[0].isIntersecting;},{threshold:0.1}).observe(canvas);
 
   const particles=[];
   const cityOSPulses=[];
@@ -1167,6 +1172,7 @@
   }
 
   function draw(now){
+    if(!isVisible_iot){ requestAnimationFrame(draw); return; }
     if(!W || !H){ size(); requestAnimationFrame(draw); return; }
     ctx.clearRect(0,0,W,H);
     drawDividers();
@@ -1374,6 +1380,8 @@ window.__stadiumState = window.__stadiumState || { active: null };
     ctx.setTransform(s, 0, 0, s, ox, oy);
   }
   size();
+  let isVisible_green = false;
+  new IntersectionObserver(e=>{isVisible_green=e[0].isIntersecting;},{threshold:0.1}).observe(canvas);
   let resizeT;
   addEventListener('resize', ()=>{ clearTimeout(resizeT); resizeT = setTimeout(size, 100); });
 
@@ -1447,6 +1455,7 @@ window.__stadiumState = window.__stadiumState || { active: null };
   }
 
   function draw(now){
+    if(!isVisible_green){ requestAnimationFrame(draw); return; }
     const elapsed = now - startTime;
     // clear in drawing space
     ctx.clearRect(-50, -50, W+100, H+100);
@@ -1671,6 +1680,8 @@ window.__stadiumState = window.__stadiumState || { active: null };
 
   buildTopology();
   size(); addEventListener('resize', size);
+  let isVisible_cyber = false;
+  new IntersectionObserver(e=>{isVisible_cyber=e[0].isIntersecting;},{threshold:0.1}).observe(canvas);
 
   // Adjacency for spread
   const adj = nodes.map(()=>[]);
@@ -1766,6 +1777,7 @@ window.__stadiumState = window.__stadiumState || { active: null };
 
   // Render
   function frame(now){
+    if(!isVisible_cyber){ requestAnimationFrame(frame); return; }
     if (!W || !H){ requestAnimationFrame(frame); return; }
     ctx.clearRect(0,0,W,H);
 
