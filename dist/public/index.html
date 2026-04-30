@@ -674,7 +674,7 @@
   }
 
   function frame(now){
-    if (!pageVisible) { requestAnimationFrame(frame); return; }
+    if(document.hidden){ last=now; requestAnimationFrame(frame); return; }
     const dt=Math.min(50,now-last); last=now;
     scrollX += dt*0.06;
 
