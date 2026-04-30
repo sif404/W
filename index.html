@@ -668,10 +668,11 @@
 
   function drawScanlines(){
     ctx.fillStyle='rgba(0,0,0,0.08)';
-    for(let y=0;y<h;y+=3){ ctx.fillRect(0,y,w,1); }
+    for(let y=0;y<h;y+=6){ ctx.fillRect(0,y,w,1); }
   }
 
   function frame(now){
+    if(document.hidden){ requestAnimationFrame(frame); return; }
     const dt=Math.min(50,now-last); last=now;
     scrollX += dt*0.06;
 
