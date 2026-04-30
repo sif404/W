@@ -633,7 +633,9 @@
   const ctx=canvas.getContext('2d');
   let w,h,dpr=Math.min(devicePixelRatio||1,2);
   function size(){ w=innerWidth; h=innerHeight; canvas.width=w*dpr; canvas.height=h*dpr; canvas.style.width=w+'px'; canvas.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }
-  size(); addEventListener('resize',size);
+    size(); addEventListener('resize',size);
+    let pageVisible = true;
+    document.addEventListener('visibilitychange', () => { pageVisible = !document.hidden; });
 
   const labels=['TEMP_SENSOR','CROWD_DENSITY','WATER_FLOW','STRUCTURAL_STRESS','AIR_QUALITY','ENERGY_LOAD','SEISMIC','TRAFFIC'];
   const channels=labels.map((label,i)=>({
@@ -672,6 +674,7 @@
   }
 
   function frame(now){
+    if (!pageVisible) { requestAnimationFrame(frame); return; }
     const dt=Math.min(50,now-last); last=now;
     scrollX += dt*0.06;
 
