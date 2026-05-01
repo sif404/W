@@ -747,7 +747,7 @@
     el.addEventListener('mouseenter',()=>c.classList.add('hover'));
     el.addEventListener('mouseleave',()=>c.classList.remove('hover'));
   });
-  function tick(){ cx+=(tx-cx)*0.35; cy+=(ty-cy)*0.35; c.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`; requestAnimationFrame(tick); } tick();
+  function tick(){ cx+=(tx-cx)*0.18; cy+=(ty-cy)*0.18; c.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`; requestAnimationFrame(tick); } tick();
 })();
 
 /* ============ HERO FADE CYCLER (2s display + 0.5s fade) ============ */
